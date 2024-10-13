@@ -1,6 +1,6 @@
 // HackerRank Question: https://www.hackerrank.com/challenges/java-substring/problem
 
-package solutions.java.easy.Java_Substring;
+package solutions.java.Java_Substring;
 
 import java.util.*;
 

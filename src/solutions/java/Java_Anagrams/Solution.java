@@ -1,6 +1,6 @@
 // HackerRank Question: https://www.hackerrank.com/challenges/java-anagrams/problem
 
-package solutions.java.easy.Java_Anagrams;
+package solutions.java.Java_Anagrams;
 
 import java.util.Scanner;
 

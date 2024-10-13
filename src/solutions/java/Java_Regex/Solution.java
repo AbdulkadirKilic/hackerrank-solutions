@@ -1,6 +1,6 @@
 // HackerRank Question: https://www.hackerrank.com/challenges/java-regex/problem
 
-package solutions.java.medium.Java_Regex;
+package solutions.java.Java_Regex;
 
 import java.util.Scanner;
 

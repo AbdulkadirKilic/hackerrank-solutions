@@ -1,6 +1,6 @@
 // HackerRank Question: https://www.hackerrank.com/challenges/java-bigdecimal/problem
 
-package solutions.java.medium.Java_BigDecimal;
+package solutions.java.Java_BigDecimal;
 
 import java.math.BigDecimal;
 import java.util.*;

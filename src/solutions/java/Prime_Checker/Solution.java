@@ -2,9 +2,10 @@
 
 package solutions.java.Prime_Checker;
 
-class Prime {
+import java.io.*;
 
-  void checkPrime(int... numbers) {
+class Prime {
+  public void checkPrime(int... numbers) {
     for (int num : numbers) {
       if (isPrime(num)) {
         System.out.print(num + " ");
@@ -14,22 +15,32 @@ class Prime {
   }
 
   private boolean isPrime(int num) {
-    if (num <= 1) return false;
-    for (int i = 2; i * i <= num; i++) {
-      if (num % i == 0) return false;
+    if (num < 2) {
+      return false;
+    }
+    for (int i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i == 0) {
+        return false;
+      }
     }
     return true;
   }
 }
 
 public class Solution {
-
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     Prime prime = new Prime();
 
-    prime.checkPrime(2);
-    prime.checkPrime(2, 1);
-    prime.checkPrime(2, 3);
-    prime.checkPrime(2, 3, 4, 5);
+    int a = Integer.parseInt(br.readLine());
+    int b = Integer.parseInt(br.readLine());
+    int c = Integer.parseInt(br.readLine());
+    int d = Integer.parseInt(br.readLine());
+    int e = Integer.parseInt(br.readLine());
+
+    prime.checkPrime(a);
+    prime.checkPrime(a, b);
+    prime.checkPrime(a, b, c);
+    prime.checkPrime(a, b, c, d, e);
   }
 }

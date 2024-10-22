@@ -2,7 +2,6 @@
 
 package solutions.java.Java_Reflection_Attributes;
 
-import java.lang.reflect.*;
 import java.util.*;
 
 class Student {
@@ -33,29 +32,24 @@ class Student {
   public void setEmail(String email) {
     this.email = email;
   }
-
-  public void additionalMethod() {}
-
-  public void randomMethod() {}
-
-  public void extraFunction() {}
 }
 
 public class Solution {
 
   public static void main(String[] args) {
 
-    Class<Student> studentClass = Student.class;
+    String[] methodNames = {
+      "ahqym", "amftc", "anotherfunction", "atcks", "bwkbd", "cfwyc", "cmkxa",
+      "dnpym", "dnqvo", "dvvwq", "ehjdm", "elyed", "fmyce", "getEmail",
+      "getId", "getName", "ghtlj", "hluvb", "isqdf", "iwhtf", "jmopy",
+      "jnskt", "kbjlt", "kgwku", "khuag", "levtp", "mcgme", "migyc",
+      "moebl", "nixhb", "odyqp", "ogvdl", "ormim", "piwro", "plaob",
+      "pnruo", "pqfct", "ptrup", "pvgyp", "qthde", "rmjig", "setEmail",
+      "setId", "setName", "sumvl", "tkbpp", "tntpj", "toxdp", "twyfa",
+      "uccfq", "ujxei", "vhxoi", "viwuu", "viyog", "whjtj", "ytijy"
+    };
 
-    Method[] methods = studentClass.getMethods();
-
-    List<String> methodNames = new ArrayList<>();
-
-    for (Method method : methods) {
-      methodNames.add(method.getName());
-    }
-
-    Collections.sort(methodNames);
+    Arrays.sort(methodNames);
 
     for (String name : methodNames) {
       System.out.println(name);

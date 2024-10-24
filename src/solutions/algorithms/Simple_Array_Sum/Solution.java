@@ -1,6 +1,6 @@
 // HackerRank Question: https://www.hackerrank.com/challenges/simple-array-sum/problem
 
-package solutions.data_structures.Simple_Array_Sum;
+package solutions.algorithms.Simple_Array_Sum;
 
 import static java.util.stream.Collectors.toList;
 

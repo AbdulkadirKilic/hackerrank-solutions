@@ -4,117 +4,131 @@
 package solutions.data_structures.Cycle_Detection;
 
 import java.io.*;
-import java.util.stream.*;
+import java.util.*;
 
-class SinglyLinkedListNode {
-  public int data;
-  public SinglyLinkedListNode next;
+public class Solution {
 
-  public SinglyLinkedListNode(int nodeData) {
-    this.data = nodeData;
-    this.next = null;
-  }
-}
+  static class SinglyLinkedListNode {
+    public int data;
+    public SinglyLinkedListNode next;
 
-class SinglyLinkedList {
-  public SinglyLinkedListNode head;
-  public SinglyLinkedListNode tail;
-
-  public SinglyLinkedList() {
-    this.head = null;
-    this.tail = null;
+    public SinglyLinkedListNode(int nodeData) {
+      this.data = nodeData;
+      this.next = null;
+    }
   }
 
-  public void insertNode(int nodeData) {
-    SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+  static class SinglyLinkedList {
+    public SinglyLinkedListNode head;
+    public SinglyLinkedListNode tail;
 
-    if (this.head == null) {
-      this.head = node;
-    } else {
-      this.tail.next = node;
+    public SinglyLinkedList() {
+      this.head = null;
+      this.tail = null;
     }
 
-    this.tail = node;
-  }
-}
+    public void insertNode(int nodeData) {
+      SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
 
-class Result {
+      if (this.head == null) {
+        this.head = node;
+      } else {
+        this.tail.next = node;
+      }
+
+      this.tail = node;
+    }
+  }
+
+  public static void printSinglyLinkedList(
+      SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
+    while (node != null) {
+      bufferedWriter.write(String.valueOf(node.data));
+
+      node = node.next;
+
+      if (node != null) {
+        bufferedWriter.write(sep);
+      }
+    }
+  }
+
+  // Complete the hasCycle function below.
 
   /*
-   * Complete the 'has_cycle' function below.
+   * For your reference:
    *
-   * The function is expected to return an INTEGER.
-   * The function accepts INTEGER_SINGLY_LINKED_LIST llist as parameter.
+   * SinglyLinkedListNode {
+   *     int data;
+   *     SinglyLinkedListNode next;
+   * }
+   *
    */
+  static boolean hasCycle(SinglyLinkedListNode head) {
+    if (head == null) return false;
 
-  public static int has_cycle(SinglyLinkedListNode head) {
-    if (head == null) {
-      return 0; // No cycle if the list is empty
-    }
-
-    // Initialize two pointers for cycle detection
     SinglyLinkedListNode slow = head;
     SinglyLinkedListNode fast = head;
 
-    // Traverse the list with two pointers
     while (fast != null && fast.next != null) {
-      slow = slow.next; // Move slow pointer by one step
-      fast = fast.next.next; // Move fast pointer by two steps
+      slow = slow.next;
+      fast = fast.next.next;
 
-      // If slow and fast pointers meet, there is a cycle
       if (slow == fast) {
-        return 1; // Cycle detected
+        return true;
       }
     }
-
-    return 0; // No cycle
+    return false;
   }
-}
 
-public class Solution {
+  private static final Scanner scanner = new Scanner(System.in);
+
   public static void main(String[] args) throws IOException {
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bufferedWriter =
         new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-    int tests = Integer.parseInt(bufferedReader.readLine().trim());
+    int tests = scanner.nextInt();
+    scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-    IntStream.range(0, tests)
-        .forEach(
-            testsItr -> {
-              try {
-                SinglyLinkedList llist = new SinglyLinkedList();
+    for (int testsItr = 0; testsItr < tests; testsItr++) {
+      int index = scanner.nextInt();
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-                int llistCount = Integer.parseInt(bufferedReader.readLine().trim());
+      SinglyLinkedList llist = new SinglyLinkedList();
 
-                IntStream.range(0, llistCount)
-                    .forEach(
-                        i -> {
-                          try {
-                            int llistItem = Integer.parseInt(bufferedReader.readLine().trim());
-                            llist.insertNode(llistItem);
-                          } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                          }
-                        });
+      int llistCount = scanner.nextInt();
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-                // Create a cycle if indicated by the input
-                int createCycle = Integer.parseInt(bufferedReader.readLine().trim());
-                if (createCycle == 1 && llist.head != null) {
-                  // Make the tail node point back to the head or another node to form a cycle
-                  llist.tail.next = llist.head; // Creates a cycle
-                }
+      for (int i = 0; i < llistCount; i++) {
+        int llistItem = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-                int result = Result.has_cycle(llist.head);
+        llist.insertNode(llistItem);
+      }
 
-                bufferedWriter.write(String.valueOf(result));
-                bufferedWriter.newLine();
-              } catch (IOException ex) {
-                throw new RuntimeException(ex);
-              }
-            });
+      SinglyLinkedListNode extra = new SinglyLinkedListNode(-1);
+      SinglyLinkedListNode temp = llist.head;
 
-    bufferedReader.close();
+      for (int i = 0; i < llistCount; i++) {
+        if (i == index) {
+          extra = temp;
+        }
+
+        if (i != llistCount - 1) {
+          temp = temp.next;
+        }
+      }
+
+      temp.next = extra;
+
+      boolean result = hasCycle(llist.head);
+
+      bufferedWriter.write(String.valueOf(result ? 1 : 0));
+      bufferedWriter.newLine();
+    }
+
     bufferedWriter.close();
+
+    scanner.close();
   }
 }

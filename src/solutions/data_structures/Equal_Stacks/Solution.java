@@ -21,31 +21,27 @@ class Result {
    */
 
   public static int equalStacks(List<Integer> h1, List<Integer> h2, List<Integer> h3) {
-    // Calculate cumulative heights for each stack in reverse order
-    List<Integer> h1Heights = getCumulativeHeights(h1);
-    List<Integer> h2Heights = getCumulativeHeights(h2);
-    List<Integer> h3Heights = getCumulativeHeights(h3);
+    // Calculate the initial heights of each stack
+    int height1 = h1.stream().mapToInt(Integer::intValue).sum();
+    int height2 = h2.stream().mapToInt(Integer::intValue).sum();
+    int height3 = h3.stream().mapToInt(Integer::intValue).sum();
 
-    // Convert cumulative heights of h1 to a set
-    Set<Integer> h1Set = new HashSet<>(h1Heights);
+    // Initialize indices for the top of each stack
+    int index1 = 0, index2 = 0, index3 = 0;
 
-    // Find common heights by intersecting with h2 and h3
-    h1Set.retainAll(h2Heights);
-    h1Set.retainAll(h3Heights);
-
-    // Return the maximum of the common heights or 0 if none
-    return h1Set.isEmpty() ? 0 : Collections.max(h1Set);
-  }
-
-  // Helper method to calculate cumulative heights
-  private static List<Integer> getCumulativeHeights(List<Integer> heights) {
-    List<Integer> cumulativeHeights = new ArrayList<>();
-    int sum = 0;
-    for (int i = heights.size() - 1; i >= 0; i--) {
-      sum += heights.get(i);
-      cumulativeHeights.add(sum);
+    // Adjust heights to find the maximum common height
+    while (!(height1 == height2 && height2 == height3)) {
+      // Remove from the tallest stack
+      if (height1 >= height2 && height1 >= height3) {
+        height1 -= h1.get(index1++);
+      } else if (height2 >= height1 && height2 >= height3) {
+        height2 -= h2.get(index2++);
+      } else if (height3 >= height1 && height3 >= height2) {
+        height3 -= h3.get(index3++);
+      }
     }
-    return cumulativeHeights;
+
+    return height1; // height1 == height2 == height3 at this point
   }
 }
 

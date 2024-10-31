@@ -26,6 +26,9 @@ class Result {
     if (currentPrice > s) {
       return 0;
     }
+    if (totalSpent + currentPrice <= s && totalSpent + currentPrice + (currentPrice - d) > s) {
+      return 1;
+    }
 
     // Buy games while the price is decreasing to minimum m
     while (currentPrice > m && totalSpent + currentPrice <= s) {

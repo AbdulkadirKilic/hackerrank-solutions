@@ -1,4 +1,4 @@
-// HackerRank Question: https://www.hackerrank.com/challenges/fair-rations/problem
+// HackerRank Question: https://www.hackerrank.com/challenges/lisa-workbook/problem
 
 package solutions.algorithms.Lisas_Workbook;
 

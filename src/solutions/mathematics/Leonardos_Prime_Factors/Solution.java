@@ -3,6 +3,8 @@
 package solutions.mathematics.Leonardos_Prime_Factors;
 
 import java.io.*;
+import java.math.*;
+import java.util.*;
 import java.util.stream.*;
 
 class Result {
@@ -15,24 +17,50 @@ class Result {
    */
 
   public static int primeCount(long n) {
-    // Array of the first few prime numbers
-    int[] primes = {
-      2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
-    };
+    // Generate prime numbers up to a reasonable limit
+    int[] primes = generatePrimesUpTo(100); // We can generate more primes if needed
 
-    long product = 1;
     int count = 0;
+    BigInteger product = BigInteger.ONE;
+    BigInteger limit = BigInteger.valueOf(n);
 
-    // Multiply primes sequentially until product exceeds n
+    // Multiply primes until product exceeds n
     for (int prime : primes) {
-      product *= prime;
-      if (product > n) {
+      BigInteger nextProduct = product.multiply(BigInteger.valueOf(prime));
+      if (nextProduct.compareTo(limit) > 0) {
         break;
       }
+      product = nextProduct;
       count++;
     }
 
     return count;
+  }
+
+  // Helper function to generate prime numbers up to a limit
+  private static int[] generatePrimesUpTo(int limit) {
+    List<Integer> primes = new ArrayList<>();
+    boolean[] isPrime = new boolean[limit + 1];
+
+    for (int i = 2; i <= limit; i++) {
+      isPrime[i] = true;
+    }
+
+    for (int p = 2; p * p <= limit; p++) {
+      if (isPrime[p]) {
+        for (int i = p * p; i <= limit; i += p) {
+          isPrime[i] = false;
+        }
+      }
+    }
+
+    for (int i = 2; i <= limit; i++) {
+      if (isPrime[i]) {
+        primes.add(i);
+      }
+    }
+
+    return primes.stream().mapToInt(Integer::intValue).toArray();
   }
 }
 

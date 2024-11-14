@@ -1,4 +1,4 @@
-// HackerRank Question: https://www.hackerrank.com/challenges/summing-the-n-series/problem
+// HackerRank Question: https://www.hackerrank.com/challenges/connecting-towns/problem
 
 package solutions.mathematics.Connecting_Towns;
 

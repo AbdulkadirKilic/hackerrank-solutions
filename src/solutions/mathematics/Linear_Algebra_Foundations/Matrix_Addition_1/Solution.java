@@ -1,6 +1,6 @@
 // HackerRank Question: https://www.hackerrank.com/challenges/linear-algebra-foundations-1/problem
 
-package solutions.mathematics.Linear_Algebra_Foundations.Linear_Algebra_Foundations_1_Matrix_Addition;
+package solutions.mathematics.Linear_Algebra_Foundations.Matrix_Addition_1;
 
 public class Solution {
 

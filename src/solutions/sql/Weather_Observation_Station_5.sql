@@ -1,0 +1,15 @@
+-- HackerRank Question: https://www.hackerrank.com/challenges/weather-observation-station-4/problem
+
+-- City with the shortest name
+SELECT CITY, LENGTH(CITY) AS NAME_LENGTH
+FROM STATION
+WHERE LENGTH(CITY) = (SELECT MIN(LENGTH(CITY)) FROM STATION)
+ORDER BY CITY
+FETCH FIRST 1 ROWS ONLY;
+
+-- City with the longest name
+SELECT CITY, LENGTH(CITY) AS NAME_LENGTH
+FROM STATION
+WHERE LENGTH(CITY) = (SELECT MAX(LENGTH(CITY)) FROM STATION)
+ORDER BY CITY
+FETCH FIRST 1 ROWS ONLY;

@@ -1,4 +1,4 @@
--- HackerRank Question: https://www.hackerrank.com/challenges/more-than-75-marks/problem
+-- HackerRank Question: https://www.hackerrank.com/challenges/name-of-employees/problem
 
 SELECT NAME
 FROM EMPLOYEE
